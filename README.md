@@ -1,2 +1,2 @@
 # Portfolio
-A place for my code top be shown off
+A place for my code to be shown off
