@@ -7,11 +7,13 @@
 int factorial(int n);
 float root(float n);
 void sort();
+void dynamicArr(int size);
 
 /* Main function */
 int main() {
     int choice, n;
     float num;
+    int s;
 
     /* Display the menu and get the user's choice */
     while (1) {
@@ -19,7 +21,8 @@ int main() {
         printf("1. Get the factorial of an entered number\n");
         printf("2. Get the root of an entered number\n");
         printf("3. Sort a list of numbers from a txt file\n");
-        printf("4. Exit\n");
+        printf("4. Create an array Dynamically Allocated\n");
+        printf("5. Exit\n");
 
         scanf("%d", &choice);
 
@@ -41,6 +44,12 @@ int main() {
             sort();
             break;
         case 4:
+            /* Create an array Dynamically Allocated */
+            printf("Enter the size of the array: ");
+            scanf("%d", &s);
+            dynamicArr(s);
+            break;
+        case 5:
             /* Exit the program */
             exit(0);
         default:
@@ -100,4 +109,33 @@ void sort() {
     printf("\nSorted list:\n");
     for (i = 0; i < count; i++)
         printf("%d\n", arr[i]);
+}
+
+/* Function to get the square root of a number */
+void dynamicArr(int size) {
+    int* arr;
+
+    // Dynamically allocate memory for the array
+    arr = (int*)malloc(size * sizeof(int));
+
+    // Check if memory allocation was successful
+    if (arr == NULL) {
+        printf("\nMemory allocation failed.\n");
+        exit(1);
+    }
+
+    printf("\nEnter %d integers:\n", size);
+    for (int i = 0; i < size; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("\nSThe elements in the array are: ");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    // Deallocate memory for the array
+    free(arr);
+
+    return 0;
 }
