@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6vcr43px0dm1"]
+
+[ext_resource type="Script" path="res://scripts/killzone.gd" id="1_sb6p3"]
+[ext_resource type="AudioStream" uid="uid://dyny6o8phhn22" path="res://assets/sounds/hurt.wav" id="2_c6x76"]
+
+[sub_resource type="Animation" id="Animation_f40a8"]
+resource_name = "Hurt"
+length = 0.5
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HurtSound")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_c6x76")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_umif2"]
+_data = {
+"Hurt": SubResource("Animation_f40a8")
+}
+
+[node name="Killzone" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_sb6p3")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_umif2")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
